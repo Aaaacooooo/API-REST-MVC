@@ -12,6 +12,8 @@ const favicon = require('serve-favicon'); // Middleware for serving favicon
 var path = require('path')
 var app = express();
 
+var bicicletasAPIRouter = require('./routes/api/bicicletas');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -26,6 +28,10 @@ app.use(favicon(path.join(__dirname, 'public', 'cohete.ico')))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//If there are several versions of the API, /api/v1/bicicletas is usually used
+//Okeys we have only one version
+app.use('/api/bicicletas', bicicletasAPIRouter); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
